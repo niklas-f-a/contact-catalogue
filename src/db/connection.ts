@@ -6,5 +6,5 @@ export default () => {
   if(!connectionString) {
     throw new Error('Missing Mongo connection string')
   }
-  return mongoose.connect(connectionString)
+  return mongoose.set('strictQuery', false).connect(connectionString)
 }
