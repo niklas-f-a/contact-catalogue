@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon ./src/app.ts",
+    "start:dev": "nodemon ./src/server/index.ts",
     "build": "tsc",
     "test": "jest --watchAll"
   },
