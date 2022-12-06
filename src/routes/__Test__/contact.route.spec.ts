@@ -5,14 +5,14 @@ const app = makeApp()
 
 describe('Testing Contact Route', () => {
 
-  describe('/GET', () => {
+  describe('GET /contacts', () => {
     it('should respond with 200 statuscode and array of contacts', async () => {
       const res = await request(app)
                           .get('/contacts')
                           .expect(200)
                           .expect('Content-Type', /json/)
 
-      expect(res).toStrictEqual([{
+      expect(res.body.data).toStrictEqual([{
         "firstname": "Anna",
         "lastname": "Andersson",
         "email": "anna.andersson@gmail.com",
