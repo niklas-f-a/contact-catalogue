@@ -1,10 +1,13 @@
-import express from 'express'
-import * as routes from './routes'
+import express, { Router } from 'express'
 
-export default () => {
+type Routes = {
+  contactsRoute: Router
+}
+
+export default ({ contactsRoute }: Routes) => {
   const app = express()
 
-  app.use(routes.contacts)
+  app.use('contacts', contactsRoute)
 
   return app
 }

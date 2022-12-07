@@ -1,3 +1,8 @@
-import contacts from './contacts'
+import contactsRoute from './contacts'
 
-export { contacts }
+const routes = {
+  contactsRoute: contactsRoute()
+}
+
+
+export default routes
