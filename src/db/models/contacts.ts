@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-interface Contacts {
+interface Contact {
   firstname: string,
   lastname: string,
   email: string,
@@ -11,7 +11,7 @@ interface Contacts {
   country: string
 }
 
-const contactSchema = new Schema<Contacts>({
+const contactSchema = new Schema<Contact>({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -23,6 +23,6 @@ const contactSchema = new Schema<Contacts>({
 })
 
 
-const Contacts = model<Contacts>('Contacts', contactSchema)
+const Contact = model<Contact>('Contact', contactSchema)
 
-export default Contacts
+export default Contact
