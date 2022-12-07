@@ -10,7 +10,7 @@ class Validator {
 
   }
 
-  static validateZersonalNumber() {
+  static validatePersonalNumber() {
 
   }
 
