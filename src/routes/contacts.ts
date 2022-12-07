@@ -1,13 +1,25 @@
 import express from 'express'
+import Contact from '../db/models/contacts'
 
+interface Args {
+  createContact: (newContact: Contact) => Promise<void>
+}
 
-export default () => {
+export default ({ createContact }: Args) => {
   const router = express.Router()
 
-  router.post('/', (req, res) => {
-    console.log(req.body);
+  router.post('/', async (req, res) => {
+    try{
+      await createContact(req.body)
+      res.status(201).json({})
 
-    res.status(201).json({})
+    } catch (error) {
+      res.status(500).send()
+    }
+  })
+
+  router.get('/', (req, res) => {
+
   })
 
   return router

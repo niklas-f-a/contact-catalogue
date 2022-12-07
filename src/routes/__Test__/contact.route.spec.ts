@@ -3,7 +3,8 @@ import { default as request } from 'supertest'
 import makeApp from '../../app'
 import createContactRoutes from '../contacts'
 
-const contactsRoute = createContactRoutes()
+const createContact = jest.fn()
+const contactsRoute = createContactRoutes({ createContact })
 
 const app = makeApp({ contactsRoute })
 
@@ -39,6 +40,7 @@ const validContacts = [
 describe('Testing Contact Route', () => {
 
   describe('POST /contacts', () => {
+
     it('should respond with error messages if incorrect data is posted - statuscode 400', () => {
 
     })
@@ -59,8 +61,8 @@ describe('Testing Contact Route', () => {
         const response = await request(app)
                                 .post('/contacts')
                                 .send(newContact)
+                                .expect(201)
     })
-
   })
 
   describe('GET /contacts', () => {
