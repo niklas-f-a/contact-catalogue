@@ -1,4 +1,5 @@
 import { default as request } from 'supertest'
+
 import makeApp from '../../app'
 import createContactRoutes from '../contacts'
 
@@ -43,22 +44,21 @@ describe('Testing Contact Route', () => {
     })
 
     it('should return posted user with statuscode 201', async () => {
+
       const newContact = {
-        "firstname": "Anna",
-        "lastname": "Andersson",
-        "email": "anna.andersson@gmail.com",
-        "personalnumber": "550713-1405",
-        "address": "Utvecklargatan 12",
-        "zipCode": "111 22",
-        "city": "Stockholm",
-        "country": "Sweden"
+        firstname: "Anna",
+        lastname: "Andersson",
+        email: "anna.andersson@gmail.com",
+        personalnumber: "550713-1405",
+        address: "Utvecklargatan 12",
+        zipCode: "111 22",
+        city: "Stockholm",
+        country: "Sweden"
         }
 
-      await request(app)
-              .post('/contacts')
-              .send(newContact)
-              .expect(201)
-              .expect('Content-Type', /json/)
+        const response = await request(app)
+                                .post('/contacts')
+                                .send(newContact)
     })
 
   })
