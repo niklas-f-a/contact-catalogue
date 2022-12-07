@@ -1,10 +1,14 @@
-import Validate from '../validate'
+import Validator from '../validator'
 
 describe('Validate', () => {
   describe('validateEmail', () => {
-    it('should return error message with no valid email', () => {
 
+    it('should save error message with no valid email sent in as arg', () => {
+      Validator.validateEmail('hej')
+      expect(Validator.hasError).toBe(true)
+      expect(Validator.errorMessage).toMatch([{ error: 'email is missong' }])
     })
+
     it('should have no error message with correct email', () => {
 
     })
