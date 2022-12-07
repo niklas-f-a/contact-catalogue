@@ -7,7 +7,9 @@ type Routes = {
 export default ({ contactsRoute }: Routes) => {
   const app = express()
 
-  app.use('contacts', contactsRoute)
+  app.use(express.json())
+
+  app.use('/contacts', contactsRoute)
 
   return app
 }
