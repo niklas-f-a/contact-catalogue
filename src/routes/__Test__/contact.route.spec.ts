@@ -44,18 +44,18 @@ describe('Testing Contact Route', () => {
     it('should respond with error messages if incorrect data is posted - statuscode 400', async () => {
       const response = await request(app)
                                 .post('/contacts')
-                                .send({
-                                  firstname: "Anna",
-                                  lastname: "Andersson",
-                                  email: "anna.andersson@gmail.com",
-                                  personalnumber: "550713-1405",
-                                  address: "Utvecklargatan 12",
-                                  zipCode: "111 22",
-                                  city: "Stockholm",
-                                  })
-                                .expect(404)
+                                .send({})
+                                .expect(400)
 
-      expect(response.body.message).toBe([{ error: 'country is missing' }])
+      expect(response.body.message).toBe([
+          { error: "firstname is missing"},
+          { error: "lastname is missing"},
+          { error: "email is missing"},
+          { error: "personalnumber is missing"},
+          { error: "address is missing"},
+          { error: "zipcode is missing"},
+          { error: "city is missing"},
+        ])
     })
 
     it('should return posted user with statuscode 201', async () => {
