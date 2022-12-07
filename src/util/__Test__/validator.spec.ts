@@ -10,7 +10,9 @@ describe('Validate', () => {
     })
 
     it('should have no error message with correct email', () => {
-
+      Validator.validateEmail('hej@gmail.com')
+      expect(Validator.hasError).toBe(false)
+      expect(Validator.errorMessage).toBe(null)
     })
 
   })
