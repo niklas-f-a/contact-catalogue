@@ -3,11 +3,6 @@ import { default as request } from 'supertest'
 import makeApp from '../../app'
 import createContactRoutes from '../contacts'
 
-const createContact = jest.fn().mockResolvedValue({pytt: 'i panna'})
-const contactsRoute = createContactRoutes({ createContact })
-
-const app = makeApp({ contactsRoute })
-
 const validContacts = [
   {
     id: "638cfd06f84b41a7be61ebad",
@@ -36,6 +31,12 @@ const validContacts = [
     lng: 18.0710935
   },
 ]
+
+const createContact = jest.fn().mockResolvedValue({pytt: 'i panna'})
+const getAllContacts = jest.fn().mockResolvedValue(validContacts)
+const contactsRoute = createContactRoutes({ createContact, getAllContacts })
+
+const app = makeApp({ contactsRoute })
 
 describe('Testing Contact Route', () => {
 
@@ -87,8 +88,8 @@ describe('Testing Contact Route', () => {
                           .expect(200)
                           .expect('Content-Type', /json/)
 
-      expect(res.body.data).toEqual(validContacts)
-      expect(res.body.data.length).toBeLessThanOrEqual(10)
+      expect(res.body).toEqual(validContacts)
+      expect(res.body.length).toBeLessThanOrEqual(10)
     })
 
   })
