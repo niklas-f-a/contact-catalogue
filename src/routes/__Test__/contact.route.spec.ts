@@ -147,5 +147,12 @@ describe('Testing Contact Route', () => {
               .get('/contacts/638cfd06f84b41a7be61eadb')
               .expect(404)
     })
+
+    it('shoul throw error with status code 500', async () => {
+      findContactById.mockImplementationOnce(() => { throw new Error('Kraaaaasch') })
+      await request(app)
+              .get('/contacts/638cfd06f84b41a7be61eadb')
+              .expect(500)
+    })
   })
 })
