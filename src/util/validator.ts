@@ -42,6 +42,15 @@ class Validator {
   }
 
   static validatePersonalNumber(value: unknown) {
+    if(typeof value !== 'string') {
+      this.errorMessages.push({ error: 'correct personalnumber is missong' })
+    } else {
+      const splitted = value.split('-')
+      if (splitted.length !== 2 || isNaN(+splitted[0]) || isNaN(+splitted[1])) {
+        this.errorMessages.push({ error: 'correct personalnumber is missong' })
+      }
+    }
+
     return this
   }
 

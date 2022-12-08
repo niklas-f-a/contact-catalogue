@@ -32,6 +32,12 @@ describe('Validate', () => {
 
   describe('validatePersonalNumber', () => {
     it('should return error message with invalid personal number', () => {
+      Validator.validatePersonalNumber('7998')
+      expect(Validator.checkError().hasError).toBe(true)
+      expect(Validator.checkError().messages()).toEqual([{ error: 'correct personalnumber is missong' }])
+    })
+
+    it('should return error message with invalid personal number', () => {
       Validator.validatePersonalNumber(7998)
       expect(Validator.checkError().hasError).toBe(true)
       expect(Validator.checkError().messages()).toEqual([{ error: 'correct personalnumber is missong' }])
@@ -40,7 +46,7 @@ describe('Validate', () => {
     it('should have no error message with correct personal number', () => {
       Validator.validatePersonalNumber('781221-1222')
       expect(Validator.checkError().hasError).toBe(false)
-      expect(Validator.checkError().messages()).toEqual(null)
+      expect(Validator.checkError().messages()).toEqual([])
     })
   })
 
