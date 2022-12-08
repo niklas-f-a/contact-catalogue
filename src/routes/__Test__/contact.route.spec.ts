@@ -34,7 +34,9 @@ const validContacts = [
 
 const createContact = jest.fn().mockResolvedValue({pytt: 'i panna'})
 const getAllContacts = jest.fn().mockResolvedValue(validContacts)
-const contactsRoute = createContactRoutes({ createContact, getAllContacts })
+const findContactById = jest.fn().mockRejectedValue(validContacts[1])
+
+const contactsRoute = createContactRoutes({ createContact, getAllContacts, findContactById })
 
 const app = makeApp({ contactsRoute })
 
@@ -101,7 +103,7 @@ describe('Testing Contact Route', () => {
                           .expect(200)
                           .expect('Content-Type', /json/)
 
-      expect(res.body.data).toEqual(validContacts[1])
+      expect(res.body).toEqual(validContacts[1])
     })
 
     it('should throw an error when not sending a correct mongo object id', () => {
