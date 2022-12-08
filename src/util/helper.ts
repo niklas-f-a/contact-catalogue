@@ -1,11 +1,16 @@
 
+type ParseQuery = {
+  page?: string | number,
+  limit?: string | number
+}
 
-export const parsePageQuery = ({page, limit}: {page?: string, limit?: string}) => {
+export const parsePageQuery = ({page, limit}: ParseQuery) => {
   const maxLimit = 10
-  const newPage = page ? +page : 1
+  const newPage = page ? Number(page) : 1
   let newLimit = 10
-  if(limit && +limit < maxLimit) {
-    newLimit = +limit
+
+  if(limit && Number(limit) < maxLimit) {
+    newLimit = Number(limit)
   }
   return { page: newPage, limit: newLimit }
 }
