@@ -4,7 +4,7 @@ describe('Validate', () => {
   describe('validateEmail', () => {
 
     it('should save error message with no valid email sent in as arg', () => {
-      Validator.validateEmail('hej')
+      Validator.validateEmail('hej.com')
       expect(Validator.checkError().hasError).toBe(true)
       expect(Validator.checkError().messages()).toEqual([{ error: 'correct email is missong' }])
     })
@@ -26,7 +26,7 @@ describe('Validate', () => {
     it('should have no error message with correct zip code', () => {
       Validator.validateZipCode(12345)
       expect(Validator.checkError().hasError).toBe(false)
-      expect(Validator.checkError().messages()).toEqual(null)
+      expect(Validator.checkError().messages()).toEqual([])
     })
   })
 

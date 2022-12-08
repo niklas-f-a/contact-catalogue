@@ -20,9 +20,7 @@ class Validator {
   }
 
   static checkError = () => {
-    // this.message = [...this.errorMessages]
     this.hasError = this.errorMessages.length > 0
-    // this.errorMessages = []
     return this
   }
 
@@ -36,6 +34,10 @@ class Validator {
   }
 
   static validateZipCode(value: unknown) {
+    if(typeof value !== 'number' || value.toString().length !== 5) {
+      this.errorMessages.push({ error: 'correct zip is missong' })
+    }
+
     return this
   }
 
