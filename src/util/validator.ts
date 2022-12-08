@@ -1,21 +1,28 @@
 
+type ErrorMessage = {
+  error: string
+}
+
 
 class Validator {
 
-  static validateEmail() {
+  static errorMessages: ErrorMessage[] | null = null
+  static hasError = this.errorMessages ? this.errorMessages.length > 0 : false
 
+  static validateEmail(value: unknown) {
+    return this
   }
 
-  static validateZipCode() {
-
+  static validateZipCode(value: unknown) {
+    return this
   }
 
-  static validatePersonalNumber() {
-
+  static validatePersonalNumber(value: unknown) {
+    return this
   }
 
-  static validateText() {
-
+  static validateText(value: unknown) {
+    return this
   }
 }
 
