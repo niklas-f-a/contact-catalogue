@@ -1,7 +1,8 @@
 import express from 'express'
-import Contact from '../db/models/contacts'
+import Contact from '../db/models/contacts.model'
 import { validatePostContact, validateObjectId } from '../validation'
 import { parsePageQuery } from '../util/helper'
+import { geoLocate } from '../db/models/contact.service'
 
 interface Args {
   createContact: (newContact: Contact) => Promise<void>
@@ -29,7 +30,13 @@ export default ({ createContact, getAllContacts, findContactById }: Args) => {
     try {
       const contacts = await getAllContacts(page, limit)
 
-      res.status(200).json(contacts)
+      let contactsWithGeo: Contact[] = []
+      for(let contact of contacts) {
+        const geo = await geoLocate(contact.city, contact.country)
+        contactsWithGeo = [...contactsWithGeo, { ...contact, ...geo[0] }]
+      }
+
+      res.status(200).json(contactsWithGeo)
     } catch (error) {
       res.status(500).send()
     }
@@ -38,12 +45,19 @@ export default ({ createContact, getAllContacts, findContactById }: Args) => {
   router.get('/:id', validateObjectId, async (req, res) => {
     const { id } = req.params
 
-    const contact = await findContactById(id)
+    try {
+      const contact = await findContactById(id)
 
-    if(!contact) {
-      res.status(404).send()
-    } else {
-      res.status(200).json(contact)
+      if(!contact) {
+        res.status(404).send()
+      } else {
+        const geo = await geoLocate(contact.city, contact.country)
+        const contactWithGeo = { ...contact, ...geo[0]}
+
+        res.status(200).json(contactWithGeo)
+      }
+    } catch (error) {
+      res.status(500).send()
     }
   })
 

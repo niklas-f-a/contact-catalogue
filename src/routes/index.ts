@@ -1,5 +1,5 @@
-import contactsRoute from './contacts'
-import { createContact, getAllContacts, findContactById } from '../db/models/contactService'
+import contactsRoute from './contacts.route'
+import { createContact, getAllContacts, findContactById } from '../db/models/contact.service'
 
 const routes = {
   contactsRoute: contactsRoute({ createContact, getAllContacts, findContactById })

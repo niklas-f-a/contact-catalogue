@@ -1,7 +1,8 @@
 import { default as request } from 'supertest'
+import nock from 'nock'
 
 import makeApp from '../../app'
-import createContactRoutes from '../contacts'
+import createContactRoutes from '../contacts.route'
 
 const validContacts = [
   {
@@ -31,6 +32,11 @@ const validContacts = [
     lng: 18.0710935
   },
 ]
+
+nock(`https://api.api-ninjas.com`)
+  .get('/v1/geocoding?city=Stockholm&country=Sweden')
+  .reply(200)
+  .persist()
 
 const createContact = jest.fn().mockResolvedValue({pytt: 'i panna'})
 const getAllContacts = jest.fn().mockResolvedValue(validContacts)
