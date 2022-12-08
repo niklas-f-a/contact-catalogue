@@ -6,10 +6,32 @@ type ErrorMessage = {
 
 class Validator {
 
-  static errorMessages: ErrorMessage[] | null = null
-  static hasError = this.errorMessages ? this.errorMessages.length > 0 : false
+  static emailRegex = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
+
+
+  static hasError: boolean = false
+
+  static errorMessages: ErrorMessage[] = []
+
+  static messages = () => {
+    const message = this.errorMessages
+    this.errorMessages = []
+    return message
+  }
+
+  static checkError = () => {
+    // this.message = [...this.errorMessages]
+    this.hasError = this.errorMessages.length > 0
+    // this.errorMessages = []
+    return this
+  }
 
   static validateEmail(value: unknown) {
+    if(typeof value !== 'string' || !this.emailRegex.test(value)) {
+
+      this.errorMessages.push({ error: 'correct email is missong' })
+    }
+
     return this
   }
 
