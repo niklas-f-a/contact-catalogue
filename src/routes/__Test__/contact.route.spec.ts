@@ -34,7 +34,7 @@ const validContacts = [
 
 const createContact = jest.fn().mockResolvedValue({pytt: 'i panna'})
 const getAllContacts = jest.fn().mockResolvedValue(validContacts)
-const findContactById = jest.fn().mockRejectedValue(validContacts[1])
+const findContactById = jest.fn().mockResolvedValue(validContacts[1])
 
 const contactsRoute = createContactRoutes({ createContact, getAllContacts, findContactById })
 
