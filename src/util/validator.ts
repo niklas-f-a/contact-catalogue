@@ -13,6 +13,7 @@ class Validator {
   static messages = () => {
     const message = this.#errorMessages
     this.#errorMessages = []
+    this.hasError = false
     return message
   }
 
@@ -31,8 +32,13 @@ class Validator {
   }
 
   static validateZipCode(value: unknown) {
-    if(typeof value !== 'number' || value.toString().length !== 5) {
+    if(typeof value !== 'string') {
       this.#errorMessages.push({ error: 'correct zip is missing' })
+    } else {
+      const trimmed = value.replace(/\s/g,'')
+      if(trimmed.length !== 5) {
+        this.#errorMessages.push({ error: 'correct zip is missing' })
+      }
     }
 
     return this

@@ -3,7 +3,7 @@ import { default as request } from 'supertest'
 import makeApp from '../../app'
 import createContactRoutes from '../contacts'
 
-const createContact = jest.fn()
+const createContact = jest.fn().mockResolvedValue({pytt: 'i panna'})
 const contactsRoute = createContactRoutes({ createContact })
 
 const app = makeApp({ contactsRoute })
@@ -59,7 +59,7 @@ describe('Testing Contact Route', () => {
         ])
     })
 
-    it('should return posted user with statuscode 201', async () => {
+    it('should responde with statuscode 201', async () => {
 
       const newContact = {
         firstname: "Anna",
@@ -70,12 +70,13 @@ describe('Testing Contact Route', () => {
         zipCode: "111 22",
         city: "Stockholm",
         country: "Sweden"
-        }
+      }
 
-        const response = await request(app)
-                                .post('/contacts')
-                                .send(newContact)
-                                .expect(201)
+      const response = await request(app)
+                              .post('/contacts')
+                              .send(newContact)
+                              .expect(201)
+
     })
   })
 

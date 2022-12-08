@@ -22,8 +22,14 @@ describe('Validate', () => {
       expect(Validator.checkError().messages()).toEqual([{ error: 'correct zip is missing' }])
     })
 
-    it('should have no error message with correct zip code', () => {
+    it('should return error message with invalid zip code', () => {
       Validator.validateZipCode(12345)
+      expect(Validator.checkError().hasError).toBe(true)
+      expect(Validator.checkError().messages()).toEqual([{ error: 'correct zip is missing' }])
+    })
+
+    it('should have no error message with correct zip code', () => {
+      Validator.validateZipCode('123 45')
       expect(Validator.checkError().hasError).toBe(false)
       expect(Validator.checkError().messages()).toEqual([])
     })

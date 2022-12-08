@@ -3,7 +3,7 @@ import Contact from '../db/models/contacts'
 import { validatePostContact } from '../validation'
 
 interface Args {
-  createContact: (newContact: Contact) => Promise<void>
+  createContact: (newContact: Contact) => Promise<Contact>
 }
 
 export default ({ createContact }: Args) => {
@@ -11,8 +11,14 @@ export default ({ createContact }: Args) => {
 
   router.post('/', validatePostContact, async (req, res) => {
     try{
-      await createContact(req.body)
-      res.status(201).json({})
+      const createdContact = await createContact(req.body)
+
+      if(createdContact) {
+        res.status(201).json({})
+      } else {
+        res.status(400).send()
+
+      }
 
     } catch (error) {
       res.status(500).send()
