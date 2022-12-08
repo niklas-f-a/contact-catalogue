@@ -1,8 +1,7 @@
 import Validator from '../validator'
 
 describe('Validate', () => {
-  describe('validateEmail', () => {
-
+  describe('Email', () => {
     it('should save error message with no valid email sent in as arg', () => {
       Validator.validateEmail('hej.com')
       expect(Validator.checkError().hasError).toBe(true)
@@ -16,7 +15,7 @@ describe('Validate', () => {
     })
 
   })
-  describe('validateZipCode', () => {
+  describe('ZipCode', () => {
     it('should return error message with invalid zip code', () => {
       Validator.validateZipCode(12)
       expect(Validator.checkError().hasError).toBe(true)
@@ -30,7 +29,7 @@ describe('Validate', () => {
     })
   })
 
-  describe('validatePersonalNumber', () => {
+  describe('PersonalNumber', () => {
     it('should return error message with invalid personal number', () => {
       Validator.validatePersonalNumber('7998')
       expect(Validator.checkError().hasError).toBe(true)
@@ -50,7 +49,13 @@ describe('Validate', () => {
     })
   })
 
-  describe('validateText', () => {
+  describe('Text', () => {
+    it('should return error message with invalid text', () => {
+      Validator.validateText(undefined)
+      expect(Validator.checkError().hasError).toBe(true)
+      expect(Validator.checkError().messages()).toEqual([{ error: 'correct text is missong' }])
+    })
+
     it('should return error message with invalid text', () => {
       Validator.validateText('')
       expect(Validator.checkError().hasError).toBe(true)
@@ -60,7 +65,7 @@ describe('Validate', () => {
     it('should have no error message with correct text', () => {
       Validator.validateText('hej')
       expect(Validator.checkError().hasError).toBe(false)
-      expect(Validator.checkError().messages()).toEqual(null)
+      expect(Validator.checkError().messages()).toEqual([])
     })
   })
 })

@@ -55,6 +55,9 @@ class Validator {
   }
 
   static validateText(value: unknown) {
+    if(typeof value !== 'string' || value.length === 0) {
+      this.errorMessages.push({ error: 'correct text is missong' })
+    }
     return this
   }
 }
