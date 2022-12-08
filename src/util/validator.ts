@@ -3,14 +3,11 @@ type ErrorMessage = {
   error: string
 }
 
-
 class Validator {
 
-  static emailRegex = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
-
+  static #emailRegex = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
 
   static hasError: boolean = false
-
   static errorMessages: ErrorMessage[] = []
 
   static messages = () => {
@@ -25,7 +22,7 @@ class Validator {
   }
 
   static validateEmail(value: unknown) {
-    if(typeof value !== 'string' || !this.emailRegex.test(value)) {
+    if(typeof value !== 'string' || !this.#emailRegex.test(value)) {
 
       this.errorMessages.push({ error: 'correct email is missong' })
     }
