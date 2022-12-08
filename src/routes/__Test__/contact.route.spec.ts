@@ -10,30 +10,30 @@ const app = makeApp({ contactsRoute })
 
 const validContacts = [
   {
-    "id": "638cfd06f84b41a7be61ebad",
-    "firstname": "Anna",
-    "lastname": "Andersson",
-    "email": "anna.andersson@gmail.com",
-    "personalnumber": "550713-1405",
-    "address": "Utvecklargatan 12",
-    "zipCode": "111 22",
-    "city": "Stockholm",
-    "country": "Sweden",
-    "lat": 59.3251172,
-    "lng": 18.0710935
+    id: "638cfd06f84b41a7be61ebad",
+    firstname: "Anna",
+    lastname: "Andersson",
+    emai: "anna.andersson@gmail.com",
+    personalnumber: "550713-1405",
+    address: "Utvecklargatan 12",
+    zipCode: "111 22",
+    city: "Stockholm",
+    country: "Sweden",
+    lat: 59.3251172,
+    lng: 18.0710935
   },
   {
-    "id": "638cfd06f84b41a7be61eadb",
-    "firstname": "Erik",
-    "lastname": "Eriksson",
-    "email": "erik.eriksson@gmail.com",
-    "personalnumber": "740301-1405",
-    "address": "Utvecklargatan 12",
-    "zipCode": "111 22",
-    "city": "Stockholm",
-    "country": "Sweden",
-    "lat": 59.3251172,
-    "lng": 18.0710935
+    id: "638cfd06f84b41a7be61eadb",
+    firstname: "Erik",
+    lastname: "Eriksson",
+    email: "erik.eriksson@gmail.com",
+    personalnumber: "740301-1405",
+    address: "Utvecklargatan 12",
+    zipCode: "111 22",
+    city: "Stockholm",
+    country: "Sweden",
+    lat: 59.3251172,
+    lng: 18.0710935
   },
 ]
 
@@ -47,14 +47,15 @@ describe('Testing Contact Route', () => {
                                 .send({})
                                 .expect(400)
 
-      expect(response.body.message).toBe([
+      expect(response.body).toEqual([
           { error: "firstname is missing"},
           { error: "lastname is missing"},
-          { error: "email is missing"},
-          { error: "personalnumber is missing"},
+          { error: "correct email is missing"},
+          { error: "correct personalnumber is missing"},
           { error: "address is missing"},
-          { error: "zipcode is missing"},
+          { error: "correct zip is missing"},
           { error: "city is missing"},
+          { error: "country is missing"},
         ])
     })
 

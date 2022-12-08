@@ -1,5 +1,6 @@
 import express from 'express'
 import Contact from '../db/models/contacts'
+import { validatePostContact } from '../validation'
 
 interface Args {
   createContact: (newContact: Contact) => Promise<void>
@@ -8,7 +9,7 @@ interface Args {
 export default ({ createContact }: Args) => {
   const router = express.Router()
 
-  router.post('/', async (req, res) => {
+  router.post('/', validatePostContact, async (req, res) => {
     try{
       await createContact(req.body)
       res.status(201).json({})
