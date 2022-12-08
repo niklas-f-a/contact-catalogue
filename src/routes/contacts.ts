@@ -41,7 +41,7 @@ export default ({ createContact, getAllContacts, findContactById }: Args) => {
     const contact = await findContactById(id)
 
     if(!contact) {
-      res.status(400).send()
+      res.status(404).send()
     } else {
       res.status(200).json(contact)
     }

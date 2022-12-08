@@ -115,7 +115,7 @@ describe('Testing Contact Route', () => {
     it('should send back 404 statuscode when no contact found', async () => {
       findContactById.mockResolvedValue(null)
       await request(app)
-              .get('/contacts/638cfd06f84b41a7be61eadw')
+              .get('/contacts/638cfd06f84b41a7be61eadb')
               .expect(404)
     })
   })
