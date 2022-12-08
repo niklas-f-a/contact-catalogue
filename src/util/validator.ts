@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose"
 
 type ErrorMessage = {
   error: string
@@ -62,6 +63,12 @@ class Validator {
       this.#errorMessages.push({ error: `${name} is missing` })
     }
     return this
+  }
+
+  static isMObjectId(id: string) {
+    if(!isValidObjectId(id)) {
+      this.#errorMessages.push({ error: `Invalid ObjectId` })
+    }
   }
 }
 

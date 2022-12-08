@@ -21,3 +21,15 @@ export const validatePostContact = (req: Request, res: Response, next: NextFunct
   }
 
 }
+
+export const validateObjectId = (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params
+
+  Validator.isMObjectId(id)
+
+  if(Validator.checkError().hasError) {
+    res.status(400).json(Validator.messages())
+  } else {
+    next()
+  }
+}
