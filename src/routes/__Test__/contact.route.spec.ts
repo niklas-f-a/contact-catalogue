@@ -106,12 +106,17 @@ describe('Testing Contact Route', () => {
       expect(res.body).toEqual(validContacts[1])
     })
 
-    it('should throw an error when not sending a correct mongo object id', () => {
-
+    it('should throw an error when not sending a correct mongo object id', async () => {
+      await request(app)
+              .get('/contacts/868768')
+              .expect(400)
     })
 
-    it('should send back 404 statuscode when no contact found', () => {
-
+    it('should send back 404 statuscode when no contact found', async () => {
+      findContactById.mockResolvedValue(null)
+      await request(app)
+              .get('/contacts/638cfd06f84b41a7be61eadw')
+              .expect(404)
     })
   })
 })
