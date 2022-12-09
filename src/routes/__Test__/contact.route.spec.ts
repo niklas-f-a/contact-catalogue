@@ -35,7 +35,14 @@ const validContacts = [
 
 nock(`https://api.api-ninjas.com`)
   .get('/v1/geocoding?city=Stockholm&country=Sweden')
-  .reply(200)
+  .reply(200, [
+    {
+    name: "Stockholm",
+    latitude: 59.3251172,
+    longitude: 18.0710935,
+    country: "SE"
+    },
+  ])
   .persist()
 
 const createContact = jest.fn().mockResolvedValue({pytt: 'i panna'})
